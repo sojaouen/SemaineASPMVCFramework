@@ -1,0 +1,14 @@
+﻿@model MonPremierWeb.Models.Abonne
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Afficher mon abonne</h2>
+
+<p>
+    Numero : @Model.Id<br />
+    Nom : @Model.Nom<br />
+    Prenom : @Model.Prenom<br />
+    E-Mail : @Model.Email<br />
+</p>

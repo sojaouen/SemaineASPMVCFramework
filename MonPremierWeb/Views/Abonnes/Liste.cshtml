@@ -1,0 +1,51 @@
+﻿@model IEnumerable<MonPremierWeb.Models.Abonne>
+@{
+    ViewBag.Title = "Liste";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Voici la liste des abonnes</h2>
+
+<!-- Creer une table pour afficher notre liste 
+    
+    Une table est composee de 2 parties
+    - 1 Entete Head TH
+    - 2 td pour les datas et les 2 sont dans des rows (tr) -->
+
+<table class="table table-striped">
+
+    <tr class="success">
+        <th>Numero</th>
+        <th>Nom</th>
+        <th>Prenom</th>
+        <th>Email</th>
+    </tr>
+
+    <!-- Partir des donnees : Boucler sur tous les objets de la liste
+        Razor nous autorise a melanger du c# avec de l'HTML'-->
+
+    @foreach (var abonne in Model)
+    {
+        if (abonne.Id < 100)
+        {
+            <tr class="danger">
+                <td>@abonne.Id</td>
+                <td>@abonne.Nom</td>
+                <td>@abonne.Prenom</td>
+                <td>@abonne.Email</td>
+            </tr>
+ }
+        else
+        {
+            <tr>
+                <td>@abonne.Id</td>
+                <td>@abonne.Nom</td>
+                <td>@abonne.Prenom</td>
+                <td>@abonne.Email</td>
+            </tr>
+
+        }
+
+    }
+</table>
+

@@ -1,0 +1,67 @@
+﻿@using GridMvc.Html
+@model IEnumerable<MonPremierWeb.Models.Abonne>
+@{
+    ViewBag.Title = "Liste3";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Liste des abonnes GridMVC</h2>
+
+@Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(p => p.Id).Sortable(true).Filterable(true);
+    columns.Add(p => p.Nom).Filterable(true);
+    columns.Add(p => p.Prenom).Filterable(true);
+    columns.Add(p => p.Email);
+    columns.Add()
+    .Sanitized(false)
+    .Encoded(false)
+    .RenderValueAs(p => Html.ActionLink("Modifier", "Modif", new { id = p.Id }));
+    columns.Add()
+    .Sanitized(false)
+    .Encoded(false)
+    .RenderValueAs(p => "<button class='btn btn-danger btn-supprimer-abonne' data-id='" + p.Id + "'><span class='glyphicon glyphicon-trash'/></button>");
+}
+).WithPaging(10)
+
+@section Scripts
+    {
+    <script>
+            $(document).ready(function () {
+                $('.btn-supprimer-abonne').click(function (event) {
+
+                    /*alert("Bouton clique");*/
+                    const boutonClique = $(event.target).closest('button');
+
+                    const idASupprimer = $(boutonClique).attr('data-id');
+
+                    /*alert(idASupprimer);*/
+
+                    // Appel au server on se sert de l'Ajax --> envoyer des requetes (url/controller/method, post, data:) au back
+                    $.ajax(
+                    {
+                        url:'@Url.Action("Delete")',
+                        type: 'POST',
+                        data: { id: idASupprimer },
+
+                        success: function (data) {
+                            if (data.resultat == "OK") {
+                                /*alert("Reponse OK")*/
+                                // Pour le supprimer du DO, on le fait disparaitre suivant un fondu vers la transparence,
+                                // une fois fondu on le supprime du document
+                                $(boutonClique).closest('tr').fadeOut(500, function () {
+
+                                    $(this).remove();
+                                })
+                            }
+
+                     }
+                   }
+                );
+
+            })
+       })
+
+    </script>
+
+}
