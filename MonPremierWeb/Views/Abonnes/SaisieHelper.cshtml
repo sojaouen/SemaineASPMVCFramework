@@ -1,0 +1,52 @@
+﻿@model MonPremierWeb.Models.Abonne
+@{
+    ViewBag.Title = "SaisieHelper";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Saisie de l'abonne a l'aide des Helpers Razor</h2>
+
+@using (Html.BeginForm(actionName: "SaisieHelper", controllerName: "Abonnes", method: FormMethod.Post, htmlAttributes: new { @class = "form-horizontal" }))
+{
+    <div class="form-group">
+        <label class="col-md-2 control-label">Numero</label>
+        <div class="col-md-10">
+            @*<input type="number" class="form-control" name="Id" placeholder="Numero">*@
+
+            @Html.TextBoxFor(model => model.Id, new { @class = "form-control", @placeholder = "Numero" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-2 control-label">Nom</label>
+        <div class="col-md-10">
+            @*<input type="number" class="form-control" name="Id" placeholder="Numero">*@
+
+            @Html.TextBoxFor(model => model.Nom, new { @class = "form-control", @placeholder = "Nom" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-2 control-label">Prenom</label>
+        <div class="col-md-10">
+            @*<input type="number" class="form-control" name="Id" placeholder="Numero">*@
+
+            @Html.TextBoxFor(model => model.Prenom, new { @class = "form-control", @placeholder = "Prenom" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-2 control-label">Email</label>
+        <div class="col-md-10">
+            @*<input type="number" class="form-control" name="Id" placeholder="Numero">*@
+
+            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @placeholder = "Email" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="submit" class="btn btn-default">Enregistrer</button>
+        </div>
+    </div>
+}

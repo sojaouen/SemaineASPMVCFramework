@@ -1,0 +1,26 @@
+﻿@using GridMvc.Html
+@model IEnumerable<TP.Models.Stagiaire>
+@{
+    ViewBag.Title = "ListeGrid";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Liste des stagiaires GridMVC</h2>
+
+@Html.Grid(Model).Columns(columns=>
+{
+    columns.Add(stag => stag.Id).Sortable(true).Filterable(true);
+    columns.Add(stag => stag.Nom).Filterable(true);
+    columns.Add(stag => stag.Prenom).Filterable(true);
+    columns.Add(stag => stag.DateNaissance).Sortable(true).Filterable(true);
+    columns.Add(stag => stag.Email).Filterable(true);
+    columns.Add()
+    .Sanitized(false)
+    .Encoded(false)
+    .RenderValueAs(stag => Html.ActionLink("Modifier", "Modif", new { id = stag.Id }));
+    columns.Add()
+    .Sanitized(false)
+    .Encoded(false)
+    .RenderValueAs(stag => "<button class='btn btn-danger btn-supprimer-abonne' data-id='" + stag.Id + "'><span class='glyphicon glyphicon-trash'/></button>");
+
+}).WithPaging(10)
